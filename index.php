@@ -1,7 +1,10 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Toko</title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 </head>
@@ -48,30 +51,8 @@
     <!-- End Jumbotron -->
     <!-- Konten -->
     <div class="container mt-4 mb-4">
-        <h3>test</h3>
     </div>
     <!-- End konten -->
-    <?php
-
-    if (isset($_POST['submit'])) {
-        $merek = $_POST['nama_merek'];
-        $warna = $_POST['warna'];
-        $jumlah = $_POST['jumlah'];
-
-        include_once("controller/koneksi.php");
-
-        mysqli_query($koneksi, "INSERT INTO printer(nama_merek,warna,jumlah) VALUES('$merek','$warna','$jumlah')");
-
-        header("location:daftar_barang.php");
-    }
-    ?>
-    <!-- End Konten -->
-
-
-
-
-
-
 
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>

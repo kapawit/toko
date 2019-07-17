@@ -91,6 +91,7 @@
         $kategori = $_POST['kategori'];
         include_once("../database/koneksi.php");
         mysqli_query($koneksi, "INSERT INTO produk(nama_produk,warna,jumlah,id_merk,id_kategori) VALUES('$nama_produk','$warna','$jumlah','$merk','$kategori')");
+        header('location:view_data.php');
     }
     ?>
     <script src="../assets/js/jquery.js"></script>

@@ -45,17 +45,18 @@
                 <input type="text" class="form-control" name="nama_kategori" id="kategori">
             </div>
             <input type="submit" class="btn btn-primary" name="submit">
+            <input type="reset" class="btn btn-secondary" value="Reset" name="reset" />
         </form>
     </div>
     <!-- End konten -->
     <?php
-
     if (isset($_POST['submit'])) {
         $nama_kategori = $_POST['nama_kategori'];
         include_once("../database/koneksi.php");
         mysqli_query($koneksi, "INSERT INTO kategori(nama_kategori) VALUES('$nama_kategori')");
-        // header("location:view.php");
-    } ?>
+        header('location:create_produk.php');
+    }
+    ?>
 
     <script src="../assets/js/jquery.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>

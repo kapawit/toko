@@ -48,11 +48,12 @@
         <h1 class="text-center">Data Barang</h1>
         <table class="table table-bordered" width="100%">
             <thead>
-                <th>ID Produk</th>
-                <th>Nama Produk</th>
-                <th>Jumlah</th>
-                <th>Merk</th>
-                <th>Kategori</th>
+                <th width="10%">ID Produk</th>
+                <th width="30%">Nama Produk</th>
+                <th width="20%">Merk</th>
+                <th width="10%">Kategori</th>
+                <th width="10%">Jumlah</th>
+                <th width="20%">Action</th>
             </thead>
             <tbody>
                 <?php
@@ -60,9 +61,10 @@
                     echo "<tr>";
                     echo "<td>" . $produk['id_produk'] . "</td>";
                     echo "<td>" . $produk['nama_produk'] . "</td>";
-                    echo "<td>" . $produk['jumlah'] . "</td>";
                     echo "<td>" . $produk['nama_merk'] . "</td>";
                     echo "<td>" . $produk['nama_kategori'] . "</td>";
+                    echo "<td>" . $produk['jumlah'] . "</td>";
+                    echo "<td><a class='btn btn-warning' href='edit_produk.php?id_produk={$produk['id_produk']}'>Edit</a>  <a href='../controller/hapus_produk.php?id_produk={$produk['id_produk']}' class='btn btn-danger'>Hapus</a></td>";
                     echo "<tr>";
                 }
                 ?>
@@ -70,9 +72,9 @@
         </table>
     </div>
     <!-- End Konten -->
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/popper.js"></script>
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/popper.js"></script>
 </body>
 
 </html>
