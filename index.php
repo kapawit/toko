@@ -10,6 +10,15 @@
 </head>
 
 <body>
+    <?php
+    session_start();
+    include_once("database/koneksi.php");
+    $query_pelanggan = mysqli_query($koneksi, "SELECT pelanggan.id_pelanggan, pelanggan.nama_pelanggan from pelanggan");
+    $query_produk = mysqli_query($koneksi, "SELECT produk.id_produk, produk.harga, produk.warna, produk.jumlah, produk.harga, produk.nama_produk, merk.nama_merk, kategori.nama_kategori
+    FROM ((produk
+    INNER JOIN merk ON produk.id_merk = merk.id_merk)
+    INNER JOIN kategori ON produk.id_kategori = kategori.id_kategori) ORDER BY id_produk asc;");
+    ?>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
@@ -23,37 +32,96 @@
                         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item p-2">
-                        <a class="nav-link" href="view/create_kategori_produk.php">Tambah Kategori</a>
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Produk
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <a class="dropdown-item p-2" href="view/create_produk.php">Tambah produk</a>
+                                <a class="dropdown-item p-2" href="view/create_merk.php">Tambah Merk</a>
+                                <a class="dropdown-item p-2" href="view/create_kategori.php">Tambah Kategori</a>
+                            </div>
+                        </div>
                     </li>
                     <li class="nav-item p-2">
-                        <a class="nav-link" href="view/create_merk.php">Tambah Merk</a>
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                View Data
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <a class="dropdown-item p-2" href="view/view_data.php">View Data Produk</a>
+                                <a class="dropdown-item p-2" href="view/view_data_transaksi.php">View Data Transaksi</a>
+                            </div>
+                        </div>
                     </li>
                     <li class="nav-item p-2">
-                        <a class="nav-link" href="view/create_produk.php">Tambah produk</a>
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Login
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item p-2" href="view/login.php">Login Pelanggan</a>
+                                <a class="dropdown-item p-2" href="controller/logout.php">Logout</a>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
     <!-- End Navbar -->
-    <!-- jumbotron -->
-    <div class="jumbotron">
-        <div class="container">
-            <h1 class="display-4">Hello, world!</h1>
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-            <hr class="my-4">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-            </p>
+    <section>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">
+                    <?php if (isset($_SESSION['nama_pelanggan'])) {
+                        echo "Selamat datang " .  $_SESSION['nama_pelanggan'];
+                    } else {
+                        echo "DIGITALENT MART";
+                    }
+                    ?>
+                </h1>
+                <p class="lead">Demo Website DIGITALENT MART</p>
+            </div>
         </div>
-    </div>
-    <!-- End Jumbotron -->
-    <!-- Konten -->
-    <div class="container mt-4 mb-4">
-    </div>
-    <!-- End konten -->
+    </section>
+    <section>
+        <div class="container">
+            <h2 class="text-center">Latest Product</h2>
+            <h4 class="text-center"><?= date("Y/m/d"); ?></h4>
+            <!-- Feedback -->
+            <?php include("view/feedback/feedback.php"); ?>
+            <!-- End Feedback -->
+            <div class="row">
+                <?php
+                while ($produk = mysqli_fetch_array($query_produk)) {
+                    ?>
+                    <div class="col-lg-3 col-md-3 col-sm-12">
+                        <div class="card m-2">
+                            <img class="card-img-top" src="https://via.placeholder.com/60x40" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo $produk['nama_produk']; ?></h5>
+                                <hr>
+                                <h6>Rp. <?php echo $produk['harga']; ?></h6>
+                                <p class="card-text"><?php echo $produk['warna']; ?></p>
+                            </div>
+                            <div class="card-body">
+                                <a class="btn btn-block btn-success" href="controller/transaksi.php?id_produk=<?php echo $produk['id_produk']; ?>&harga=<?php echo $produk['harga']; ?>&id_pelanggan=<?php if (isset($_SESSION['id_pelanggan'])) {
+                                                                                                                                                                                                            echo $_SESSION['id_pelanggan'];
+                                                                                                                                                                                                        } else {
+                                                                                                                                                                                                            echo "belum_login";
+                                                                                                                                                                                                        }
+                                                                                                                                                                                                        ?>">Beli</a>
 
+                            </div>
+                        </div>
+                    </div>
+                <?php
+                }
+                ?>
+            </div>
+        </div>
+    </section>
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/popper.js"></script>
