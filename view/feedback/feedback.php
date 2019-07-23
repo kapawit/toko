@@ -17,7 +17,7 @@ if (isset($_GET['pesan'])) {
   } else if ($_GET['pesan'] == "logout") {
     echo "<div class='alert alert-info'>Anda telah berhasil logout</div>";
   } else if ($_GET['pesan'] == "belum_login") {
-    echo "<div class='alert alert-warning'>Anda harus login untuk dapat melakukan transaksi</div>";
+    echo "<div class='alert alert-warning'>Anda harus login untuk dapat mengakses halaman Ini</div>";
   } else if ($_GET['pesan'] == "daftar_sukses") {
     echo "<div class='alert alert-success'>Registrasi Sukses. Silahkan Login</div>";
   } else if ($_GET['pesan'] == "kosong") {

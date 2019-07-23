@@ -10,7 +10,7 @@ if (isset($_POST['username']) && ($_POST['password'])) {
     $data_pelanggan = mysqli_fetch_array($data);
     $cek = mysqli_num_rows($data);
     if ($cek > 0) {
-        $_SESSION['status'] = "login";
+        $_SESSION['status'] = 'login';
         $_SESSION['nama_pelanggan'] = $data_pelanggan['nama_pelanggan'];
         $_SESSION['id_pelanggan'] = $data_pelanggan['id_pelanggan'];
         header("location:../index.php?pesan=sukses");

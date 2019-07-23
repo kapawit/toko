@@ -1,5 +1,8 @@
-<?php include("templates/header.php"); ?>
-<!-- End Navbar -->
+<?php
+include("templates/header.php");
+include("templates/navbar_user.php");
+include("feedback/feedback.php");
+?>
 <!-- Konten -->
 <div class="container mt-4 mb-4">
     <h3 class="text-center">Daftar Pelanggan Baru</h3>

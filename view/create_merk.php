@@ -1,16 +1,26 @@
-<?php include("templates/header.php"); ?>
-<!-- Konten -->
-<div class="container mt-4 mb-4">
-    <?php include("feedback/feedback.php"); ?>
-    <h3 class="text-center">Tambah Merk</h3>
-    <form action="../controller/merk.php" method="post">
-        <div class="form-group">
-            <label for="nama_merk">Merk</label>
-            <input type="text" class="form-control" name="nama_merk" id="nama_merk">
-        </div>
-        <input type="submit" class="btn btn-primary" value="submit" name="submit">
-        <input type="reset" class="btn btn-secondary" value="Reset" name="reset" />
+<?php
+if (isset($_SESSION['status'])) {
+    include("templates/header.php");
+    include("templates/navbar_user.php");
+    include("templates/navbar_index.php");
+    include("feedback/feedback.php"); ?>
+    <!-- Konten -->
+    <div class="container mt-4 mb-4">
+        <?php include("feedback/feedback.php"); ?>
+        <h3 class="text-center">Tambah Merk</h3>
+        <form action="../controller/merk.php" method="post">
+            <div class="form-group">
+                <label for="nama_merk">Merk</label>
+                <input type="text" class="form-control" name="nama_merk" id="nama_merk">
+            </div>
+            <input type="submit" class="btn btn-primary" value="submit" name="submit">
+            <input type="reset" class="btn btn-secondary" value="Reset" name="reset" />
 
-    </form>
-</div>
-<?php include("templates/footer.php"); ?>
+        </form>
+    </div>
+    <?php include("templates/footer.php"); ?>
+<?php
+} else {
+    header('location:../view/login.php?pesan=belum_login');
+}
+?>

@@ -17,12 +17,12 @@
     $query_produk = mysqli_query($koneksi, "SELECT produk.id_produk, produk.harga, produk.warna, produk.jumlah, produk.harga, produk.nama_produk, merk.nama_merk, kategori.nama_kategori
     FROM ((produk
     INNER JOIN merk ON produk.id_merk = merk.id_merk)
-    INNER JOIN kategori ON produk.id_kategori = kategori.id_kategori) ORDER BY id_produk asc;");
+    INNER JOIN kategori ON produk.id_kategori = kategori.id_kategori) ORDER BY id_produk desc;");
     ?>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#"><img src="assets/img/logo.png" width="60%"></a>
+            <a class="navbar-brand p-2" href="#"><img src="assets/img/logo.png" width="70%"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -31,37 +31,31 @@
                     <li class="nav-item active p-2">
                         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item p-2">
-                        <div class="dropdown">
-                            <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Produk
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                <a class="dropdown-item p-2" href="view/create_produk.php">Tambah produk</a>
-                                <a class="dropdown-item p-2" href="view/create_merk.php">Tambah Merk</a>
-                                <a class="dropdown-item p-2" href="view/create_kategori.php">Tambah Kategori</a>
-                            </div>
-                        </div>
+                    <li class="nav-item active p-2">
+                        <a class="nav-link" href="#">Profil</a>
+                    </li>
+                    <li class="nav-item active p-2">
+                        <a class="nav-link" href="#">Berita</a>
+                    </li>
+                    <li class="nav-item active p-2">
+                        <a class="nav-link" href="#">About Us</a>
                     </li>
                     <li class="nav-item p-2">
                         <div class="dropdown">
-                            <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                View Data
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                <a class="dropdown-item p-2" href="view/view_data.php">View Data Produk</a>
-                                <a class="dropdown-item p-2" href="view/view_data_transaksi.php">View Data Transaksi</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="nav-item p-2">
-                        <div class="dropdown">
-                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Login
+                            <button type="button" class="btn btn-outline-success dropdown-toggle pl-3 pr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <?php if (isset($_SESSION['status'])) {
+                                    echo $_SESSION['nama_pelanggan'];
+                                } else {
+                                    echo "Masuk / Daftar";
+                                } ?>
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item p-2" href="view/login.php">Login Pelanggan</a>
-                                <a class="dropdown-item p-2" href="controller/logout.php">Logout</a>
+                                <?php if (isset($_SESSION['status'])) {
+                                    echo '<a class="dropdown-item pl-3 pr-3" href="controller/logout.php">Logout</a>';
+                                } else {
+                                    echo '<a class="dropdown-item pl-3 pr-3" href="view/login.php">Masuk</a>';
+                                    echo '<a class="dropdown-item pl-3 pr-3" href="view/daftar_pelanggan.php">Daftar</a>';
+                                } ?>
                             </div>
                         </div>
                     </li>
@@ -69,6 +63,10 @@
             </div>
         </div>
     </nav>
+    <?php if (isset($_SESSION['status'])) {
+        include("view/templates/navbar_index.php");
+    }
+    ?>
     <!-- End Navbar -->
     <section>
         <div class="jumbotron jumbotron-fluid">
@@ -81,7 +79,7 @@
                     }
                     ?>
                 </h1>
-                <p class="lead">Demo Website DIGITALENT MART</p>
+                <p class="lead">DIGITALENT MART</p>
             </div>
         </div>
     </section>
