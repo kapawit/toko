@@ -31,18 +31,18 @@
                     <li class="nav-item active p-2">
                         <a class="nav-link" href="http://localhost:8080/VSGA/toko">Home <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item active p-2">
+                    <li class="nav-item p-2">
                         <a class="nav-link" href="view/home/profil">Profil</a>
                     </li>
-                    <li class="nav-item active p-2">
+                    <li class="nav-item p-2">
                         <a class="nav-link" href="view/home/berita.php">Berita</a>
                     </li>
-                    <li class="nav-item active p-2">
+                    <li class="nav-item p-2">
                         <a class="nav-link" href="view/home/about.php">About Us</a>
                     </li>
                     <li class="nav-item p-2">
                         <div class="dropdown">
-                            <button type="button" class="btn btn-outline-success dropdown-toggle pl-3 pr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button type="button" class="btn btn-outline-primary dropdown-toggle pl-3 pr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <?php if (isset($_SESSION['role'])) {
                                     if (($_SESSION['role']) == 'pelanggan') {
                                         echo $_SESSION['nama_pelanggan'];
@@ -67,16 +67,18 @@
             </div>
         </div>
     </nav>
-    <?php if (isset($_SESSION['role'])) {
+    <?php
+    if (isset($_SESSION['role'])) {
         if (($_SESSION['role']) == 'karyawan') {
             include("view/templates/navbar_karyawan_index.php");
         } elseif (($_SESSION['role']) == 'pelanggan') {
+            include("view/pelanggan/view_cart.php");
             include("view/templates/navbar_pelanggan_index.php");
         }
     }
     ?>
-
     <!-- End Navbar -->
+    <!-- Jumbotron -->
     <section>
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
@@ -92,6 +94,8 @@
             </div>
         </div>
     </section>
+    <!-- End jumbotron -->
+    <!-- Produk -->
     <section>
         <div class="container">
             <h2 class="text-center">Latest Product</h2>
@@ -132,6 +136,7 @@
             </div>
         </div>
     </section>
+    <!-- End Produk -->
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/popper.js"></script>
