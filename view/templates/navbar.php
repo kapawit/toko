@@ -1,31 +1,43 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_login" aria-controls="navbar_login" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand p-2" href="#"><img src="../../assets/img/logo.png" width="70%"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <h4 class="text-white">Dashboard</h4>
-        <div class="collapse navbar-collapse" id="navbar_login">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item active p-2">
+                    <a class="nav-link" href="http://localhost:8080/VSGA/toko">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active p-2">
+                    <a class="nav-link" href="view/home/Profil.php">Profil</a>
+                </li>
+                <li class="nav-item active p-2">
+                    <a class="nav-link" href="view/home/berita.php">Berita</a>
+                </li>
+                <li class="nav-item active p-2">
+                    <a class="nav-link" href="view/home/about.php">About Us</a>
+                </li>
                 <li class="nav-item p-2">
                     <div class="dropdown">
-                        <button class="btn dropdown-toggle text-white" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Produk
+                        <button type="button" class="btn btn-outline-success dropdown-toggle pl-3 pr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <?php if (isset($_SESSION['role'])) {
+                                if (($_SESSION['role']) == 'pelanggan') {
+                                    echo $_SESSION['nama_pelanggan'];
+                                } elseif (($_SESSION['role']) == 'karyawan') {
+                                    echo $_SESSION['nama_karyawan'];
+                                }
+                            } else {
+                                echo "Masuk / Daftar";
+                            } ?>
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <a class="dropdown-item p-2" href="create_produk.php">Tambah produk</a>
-                            <a class="dropdown-item p-2" href="create_merk.php">Tambah Merk</a>
-                            <a class="dropdown-item p-2" href="create_kategori.php">Tambah Kategori</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item p-2 text-white">
-                    <div class="dropdown">
-                        <button class="btn dropdown-toggle text-white" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            View Data
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <a class="dropdown-item p-2" href="view_data.php">View Data Produk</a>
-                            <a class="dropdown-item p-2" href="view_data_transaksi.php">View Data Transaksi</a>
+                        <div class="dropdown-menu">
+                            <?php if (isset($_SESSION['role'])) {
+                                echo '<a class="dropdown-item pl-3 pr-3" href="../../controller/auth/logout.php">Logout</a>';
+                            } else {
+                                echo '<a class="dropdown-item pl-3 pr-3" href="../../view/home/login.php">Masuk</a>';
+                                echo '<a class="dropdown-item pl-3 pr-3" href="../../view/pelanggan/daftar_pelanggan.php">Daftar</a>';
+                            } ?>
                         </div>
                     </div>
                 </li>

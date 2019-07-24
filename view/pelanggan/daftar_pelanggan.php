@@ -1,12 +1,12 @@
 <?php
-include("templates/header.php");
-include("templates/navbar_user.php");
-include("feedback/feedback.php");
+include("../templates/header.php");
+include("../templates/navbar.php");
+include("../feedback/feedback.php");
 ?>
 <!-- Konten -->
 <div class="container mt-4 mb-4">
     <h3 class="text-center">Daftar Pelanggan Baru</h3>
-    <form action="../controller/pelanggan.php" method="post">
+    <form action="../../controller/pelanggan/pelanggan.php" method="post">
         <div class="form-group">
             <label for="nama">Nama lengkap</label>
             <input type="text" class="form-control" name="nama" id="nama">
@@ -39,4 +39,4 @@ include("feedback/feedback.php");
     </form>
 </div>
 <!-- End konten -->
-<?php include("templates/footer.php"); ?>
+<?php include("../templates/footer.php"); ?>

@@ -29,32 +29,36 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active p-2">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="http://localhost:8080/VSGA/toko">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active p-2">
-                        <a class="nav-link" href="#">Profil</a>
+                        <a class="nav-link" href="view/home/profil">Profil</a>
                     </li>
                     <li class="nav-item active p-2">
-                        <a class="nav-link" href="#">Berita</a>
+                        <a class="nav-link" href="view/home/berita.php">Berita</a>
                     </li>
                     <li class="nav-item active p-2">
-                        <a class="nav-link" href="#">About Us</a>
+                        <a class="nav-link" href="view/home/about.php">About Us</a>
                     </li>
                     <li class="nav-item p-2">
                         <div class="dropdown">
                             <button type="button" class="btn btn-outline-success dropdown-toggle pl-3 pr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <?php if (isset($_SESSION['status'])) {
-                                    echo $_SESSION['nama_pelanggan'];
+                                <?php if (isset($_SESSION['role'])) {
+                                    if (($_SESSION['role']) == 'pelanggan') {
+                                        echo $_SESSION['nama_pelanggan'];
+                                    } elseif (($_SESSION['role']) == 'karyawan') {
+                                        echo $_SESSION['nama_karyawan'];
+                                    }
                                 } else {
                                     echo "Masuk / Daftar";
                                 } ?>
                             </button>
                             <div class="dropdown-menu">
-                                <?php if (isset($_SESSION['status'])) {
-                                    echo '<a class="dropdown-item pl-3 pr-3" href="controller/logout.php">Logout</a>';
+                                <?php if (isset($_SESSION['role'])) {
+                                    echo '<a class="dropdown-item pl-3 pr-3" href="controller/auth/logout.php">Logout</a>';
                                 } else {
-                                    echo '<a class="dropdown-item pl-3 pr-3" href="view/login.php">Masuk</a>';
-                                    echo '<a class="dropdown-item pl-3 pr-3" href="view/daftar_pelanggan.php">Daftar</a>';
+                                    echo '<a class="dropdown-item pl-3 pr-3" href="view/home/login.php">Masuk</a>';
+                                    echo '<a class="dropdown-item pl-3 pr-3" href="view/pelanggan/daftar_pelanggan.php">Daftar</a>';
                                 } ?>
                             </div>
                         </div>
@@ -63,10 +67,15 @@
             </div>
         </div>
     </nav>
-    <?php if (isset($_SESSION['status'])) {
-        include("view/templates/navbar_index.php");
+    <?php if (isset($_SESSION['role'])) {
+        if (($_SESSION['role']) == 'karyawan') {
+            include("view/templates/navbar_karyawan_index.php");
+        } elseif (($_SESSION['role']) == 'pelanggan') {
+            include("view/templates/navbar_pelanggan_index.php");
+        }
     }
     ?>
+
     <!-- End Navbar -->
     <section>
         <div class="jumbotron jumbotron-fluid">
@@ -86,7 +95,6 @@
     <section>
         <div class="container">
             <h2 class="text-center">Latest Product</h2>
-            <h4 class="text-center"><?= date("Y/m/d"); ?></h4>
             <!-- Feedback -->
             <?php include("view/feedback/feedback.php"); ?>
             <!-- End Feedback -->
@@ -103,13 +111,17 @@
                                 <h6>Rp. <?php echo $produk['harga']; ?></h6>
                                 <p class="card-text"><?php echo $produk['warna']; ?></p>
                             </div>
-                            <div class="card-body">
-                                <a class="btn btn-block btn-success" href="controller/transaksi.php?id_produk=<?php echo $produk['id_produk']; ?>&harga=<?php echo $produk['harga']; ?>&id_pelanggan=<?php if (isset($_SESSION['id_pelanggan'])) {
-                                                                                                                                                                                                            echo $_SESSION['id_pelanggan'];
-                                                                                                                                                                                                        } else {
-                                                                                                                                                                                                            echo "belum_login";
-                                                                                                                                                                                                        }
-                                                                                                                                                                                                        ?>">Beli</a>
+                            <div class="card-footer">
+                                <a class="btn btn-block btn-success" href="controller/pemesanan.php?id_produk=<?php echo $produk['id_produk']; ?>&harga=<?php echo $produk['harga']; ?>&id=<?php if (isset($_SESSION['role'])) {
+                                                                                                                                                                                                if ($_SESSION['role'] == 'pelanggan') {
+                                                                                                                                                                                                    echo $_SESSION['id_pelanggan'];
+                                                                                                                                                                                                } elseif ($_SESSION['role'] == 'karyawan') {
+                                                                                                                                                                                                    echo "login_karyawan";
+                                                                                                                                                                                                }
+                                                                                                                                                                                            } else {
+                                                                                                                                                                                                echo "belum_login";
+                                                                                                                                                                                            }
+                                                                                                                                                                                            ?>&jumlah=1">Beli</a>
 
                             </div>
                         </div>
