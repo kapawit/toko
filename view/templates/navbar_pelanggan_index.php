@@ -7,7 +7,8 @@
         <div class="collapse navbar-collapse" id="navbar_login">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item p-2">
-                    <a class="nav-link text-white" href="view/pelanggan/view_pemesanan.php">Daftar Pemesanan</a>
+                    <a data-toggle='modal' data-target='#cart'><i class="fa fa-2x fa-shopping-cart"></i></a>
+                    <!-- <a class="nav-link text-white" href="view/pelanggan/view_pemesanan.php"><i class="fa fa-2x fa-shopping-cart"></i></a> -->
                 </li>
             </ul>
         </div>

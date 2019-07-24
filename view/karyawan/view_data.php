@@ -12,7 +12,7 @@ if (isset($_SESSION['role'])) {
         ?>
         <!-- Konten -->
         <div class="container mt-4 mb-4">
-            <h1 class="text-center">Data Barang</h1>
+            <h1 class="text-center">Data Produk</h1>
             <?php include("../feedback/feedback.php"); ?>
             <table class="table table-bordered" width="100%">
                 <thead>
