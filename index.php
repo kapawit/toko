@@ -42,7 +42,7 @@
                     </li>
                     <li class="nav-item p-2">
                         <div class="dropdown">
-                            <button type="button" class="btn btn-outline-primary dropdown-toggle pl-3 pr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button type="button" class="btn btn-outline-primary dropdown-toggle py-2 px-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <?php if (isset($_SESSION['role'])) {
                                     if (($_SESSION['role']) == 'pelanggan') {
                                         echo $_SESSION['nama_pelanggan'];
@@ -65,39 +65,53 @@
                     </li>
                 </ul>
             </div>
+            <?php
+            if (isset($_SESSION['role'])) {
+                if (($_SESSION['role']) == 'pelanggan') { 
+                include("controller/pelanggan/cart.php");?>
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#cart">
+                        <i class="fa fa-2x fa-shopping-cart"></i>
+                        <span class="badge badge-pill badge-info"><?= $cek?></span>
+                    </a>
+                    <?php include("view/pelanggan/view_cart.php"); ?>
+                <?php
+                } elseif (($_SESSION['role']) == 'karyawan') { ?>
+                    <a class="nav-link btn btn-outline-success" href="view/karyawan/view_data.php">
+                    <i class="fa fa-arrow-right"></i>
+                    </a>
+                <?php
+                }
+            }
+            ?>
         </div>
     </nav>
-    <?php
-    if (isset($_SESSION['role'])) {
-        if (($_SESSION['role']) == 'karyawan') {
-            include("view/templates/navbar_karyawan_index.php");
-        } elseif (($_SESSION['role']) == 'pelanggan') {
-            include("view/pelanggan/view_cart.php");
-            include("view/templates/navbar_pelanggan_index.php");
-        }
-    }
-    ?>
     <!-- End Navbar -->
-    <!-- Jumbotron -->
     <section>
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h1 class="display-4">
-                    <?php if (isset($_SESSION['nama_pelanggan'])) {
-                        echo "Selamat datang " .  $_SESSION['nama_pelanggan'];
-                    } else {
-                        echo "DIGITALENT MART";
-                    }
-                    ?>
-                </h1>
-                <p class="lead">DIGITALENT MART</p>
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="assets/img/carousel/slide1.jpg" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="assets/img/carousel/slide2.jpg" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="assets/img/carousel/slide3.jpg" alt="Third slide">
+                </div>
             </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
     </section>
-    <!-- End jumbotron -->
     <!-- Produk -->
     <section>
-        <div class="container">
+        <div class="container my-4">
             <h2 class="text-center">Latest Product</h2>
             <!-- Feedback -->
             <?php include("view/feedback/feedback.php"); ?>

@@ -13,6 +13,6 @@ if (isset($_GET['id'])) {
         // Query string harus menggunakan petik satu ('')
         // Kecuali number tidak harus
         // Lebih aman dikasih petik satu('')
-        header('location:../../view/pelanggan/view_pemesanan.php?pemesanan=sukses');
+        header('location:../../index.php');
     }
 }

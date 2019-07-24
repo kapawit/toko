@@ -28,5 +28,7 @@ if (isset($_GET['pesan'])) {
     echo "<div class='alert alert-danger'>Username Karyawan tidak bisa melakukan transaksi</div>";
   } else if ($_GET['pesan'] == "hapus") {
     echo "<div class='alert alert-danger'>Hapus Data Berhasil</div>";
+  } else if ($_GET['pesan'] == "hapus_cart") {
+    echo "<div class='alert alert-danger'>Barang Berhasil dihapus </div>";
   }
 }
