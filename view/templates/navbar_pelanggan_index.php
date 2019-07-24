@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="navbar_login">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item p-2">
-                    <a class="nav-link text-white" href="#">Daftar Pemesanan</a>
+                    <a class="nav-link text-white" href="view/pelanggan/view_pemesanan.php">Daftar Pemesanan</a>
                 </li>
             </ul>
         </div>

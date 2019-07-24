@@ -112,16 +112,16 @@
                                 <p class="card-text"><?php echo $produk['warna']; ?></p>
                             </div>
                             <div class="card-footer">
-                                <a class="btn btn-block btn-success" href="controller/pemesanan.php?id_produk=<?php echo $produk['id_produk']; ?>&harga=<?php echo $produk['harga']; ?>&id=<?php if (isset($_SESSION['role'])) {
-                                                                                                                                                                                                if ($_SESSION['role'] == 'pelanggan') {
-                                                                                                                                                                                                    echo $_SESSION['id_pelanggan'];
-                                                                                                                                                                                                } elseif ($_SESSION['role'] == 'karyawan') {
-                                                                                                                                                                                                    echo "login_karyawan";
-                                                                                                                                                                                                }
-                                                                                                                                                                                            } else {
-                                                                                                                                                                                                echo "belum_login";
-                                                                                                                                                                                            }
-                                                                                                                                                                                            ?>&jumlah=1">Beli</a>
+                                <a class="btn btn-block btn-success" href="controller/pelanggan/pemesanan.php?id_produk=<?php echo $produk['id_produk']; ?>&harga=<?php echo $produk['harga']; ?>&id=<?php if (isset($_SESSION['role'])) {
+                                                                                                                                                                                                            if ($_SESSION['role'] == 'pelanggan') {
+                                                                                                                                                                                                                echo $_SESSION['id_pelanggan'];
+                                                                                                                                                                                                            } elseif ($_SESSION['role'] == 'karyawan') {
+                                                                                                                                                                                                                echo "login_karyawan";
+                                                                                                                                                                                                            }
+                                                                                                                                                                                                        } else {
+                                                                                                                                                                                                            echo "belum_login";
+                                                                                                                                                                                                        }
+                                                                                                                                                                                                        ?>&jumlah=1">Beli</a>
 
                             </div>
                         </div>
