@@ -17,6 +17,7 @@ if (isset($_SESSION['role'])) {
             <h1 class="text-center">View Data Transaksi</h1>
             <table class="table table-bordered" width="100%">
                 <thead>
+                    <th width="10%">No Transaksi</th>
                     <th width="10%">Tanggal</th>
                     <th width="30%">Nama pelanggan</th>
                     <th width="20%">Produk</th>
@@ -25,14 +26,40 @@ if (isset($_SESSION['role'])) {
                 </thead>
                 <tbody>
                     <?php
-                    while ($transaksi = mysqli_fetch_array($query_transaksi)) {
-                        echo "<tr>";
-                        echo "<td>" . $transaksi['tanggal_transaksi'] . "</td>";
-                        echo "<td>" . $transaksi['nama_pelanggan'] . "</td>";
-                        echo "<td>" . $transaksi['nama_produk'] . "</td>";
-                        echo "<td>" . $transaksi['nama_merk'] . "</td>";
-                        echo "<td>" . $transaksi['total_transaksi'] . "</td>";
-                        echo "<tr>";
+                    $no = 1; // untuk view data, nomor JANGAN DIAMBIL DARI DATABASE!!. 
+                    foreach ($query_transaksi as $row) {
+                        ?>
+                        <tr>
+                            <td><?= $no++; ?></td>
+                            <td><?= $row['tanggal_transaksi']; ?></td>
+                            <td><?= $row['nama_pelanggan']; ?></td>
+                            <td><?= $row['nama_produk']; ?></td>
+                            <td><?= $row['nama_merk']; ?></td>
+                            <td><?= $row['total_transaksi']; ?></td>
+                        </tr>
+                        <!-- Modal -->
+                        <div class="modal fade" id="delete<?= $row['id_pendaftaran']; ?>" tabindex="-1" role="dialog" aria-labelledby="hapusdata" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3>
+                                            <i class="fas fa-exclamation-circle"></i>
+                                            Konfirmasi Hapus Data
+                                        </h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="alert alert-danger">
+                                            Apakah anda yakin ingin menghapus data <h5><?= $row['nama']; ?> ?</h5>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</a>
+                                        <a class="btn btn-danger " href="../controller/delete.php?id_pendaftaran=<?= $row['id_pendaftaran']; ?>">Hapus</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
                     }
                     ?>
                 </tbody>
